@@ -1,0 +1,13 @@
+def skew(text):
+    count=zeros(len(text))
+    score=0
+    for i in text:
+        switch(text[i]):
+            case 'G':
+                count[i]=score+1
+            case 'C':
+                count[i]=score-1
+            default:
+                count[i]=score
+    return count
+
