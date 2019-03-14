@@ -10,3 +10,5 @@ mots = [
     'AGCTCCTC',
     'AGCATACG'
     ]
+
+
