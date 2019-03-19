@@ -25,9 +25,9 @@ def CDPD(data,pattern):
     dist_score=len(pattern) # The maximum dist_score
     bestPattern=""
     motif=[]
-    for i in range(len(data)+1):
+    for i in range(len(data)):
         for j in range(len(data[i])-len(pattern)+1):
-            possiblePattern=data[j:j+len(pattern)]
+            possiblePattern=data[i][j:j+len(pattern)]
             ds=HammingDistance(pattern,possiblePattern)
             if ds < dist_score:
                 dist_score = ds #update the dist_score
@@ -37,5 +37,5 @@ def CDPD(data,pattern):
 
 pattern = "AAA"
 DNA_data = readFile("Dna.txt")
-printFreqsDict(frequencies_dict)
+print(CDPD(DNA_data,pattern))
 
