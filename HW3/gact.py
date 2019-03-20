@@ -23,3 +23,4 @@ def letterAt(letter, x, y, yscale=1, ax=None):
     if ax != None:
         ax.add_artist(p)
     return p
+
