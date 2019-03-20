@@ -22,6 +22,7 @@ def HammingDistance(pat1,pat2):
 
 # Calculate Distance Pattern Dna function
 def CDPD(data,pattern):
+    best=[]
     mot=[]
     k=len(pattern)
     for line in data:
@@ -31,6 +32,7 @@ def CDPD(data,pattern):
             dict[nPat]=HammingDistance(nPat,pattern)
         bestPattern = min(dict)
         mot.append(dict[bestPattern])
-    print("Motif score: " + str(sum(mot)))
+        best.append(bestPattern)
+    print(str(best)+"\nMotif score: " + str(sum(mot)))
 
 CDPD(readFile('Dna.txt'),"AAA")
