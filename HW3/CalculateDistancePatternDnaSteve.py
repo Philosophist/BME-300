@@ -25,12 +25,12 @@ def CDPD(data,pattern):
     mot=[]
     k=len(pattern)
     for line in data:
-        dict={}
-        for i in range(len(line)-k):
+        dict = {}
+        for i in range(len(line)-k+1):
             nPat=line[i:k+i]
             dict[nPat]=HammingDistance(nPat,pattern)
-        bestPattern=min(dict)
+        bestPattern = min(dict)
         mot.append(dict[bestPattern])
-    print(sum(mot))
+    print("Motif score: " + str(sum(mot)))
 
 CDPD(readFile('Dna.txt'),"AAA")
