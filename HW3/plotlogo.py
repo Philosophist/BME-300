@@ -21,10 +21,36 @@ def plot(data):
     plt.show()
 
 	
-	
-# data is in the "list of list" format 	
-data = [[('C', 0.022), ('T', 0.058), ('A', 0.104), ('G', 0.248)],
-        [('T', 0.046), ('G', 0.048), ('A', 0.084), ('C', 0.929)]]
 
-plot(data)		
+def readFile(file_name):
+    data = []
+    file = open(file_name, "r")    
+    for line in file:
+       data.append(line.strip("\n").replace(" ","")) 
+    return data
+
+def profile(motArr):
+    prof=[]
+    cols=len(motArr[0])
+    for i in range(cols): # length of each string 
+        dict = {'G':0,'C':0,'A':0,'T':0}
+        rows=len(motArr)
+        for j in range(rows): # the number of strings 
+            dict[motArr[j][i]] += 1
+        tot=sum(dict.values())
+        colProf=[]
+        for j in dict:
+            colProf.append((j,dict[j]/tot))
+        prof.append(colProf)
+    return prof
+        
+
+# data is in the "list of list" format 	
+dat = readFile("motifs.txt")
+
+
+# [[('C', 0.022), ('T', 0.058), ('A', 0.104), ('G', 0.248)],
+# [('T', 0.046), ('G', 0.048), ('A', 0.084), ('C', 0.929)]]
+
+plot(profile(dat))		
 		  
