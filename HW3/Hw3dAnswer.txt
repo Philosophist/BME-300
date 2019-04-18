@@ -1,0 +1,2 @@
+['TAA', 'ACA', 'ACA', 'AAA', 'AAA', 'AAA', 'AAA', 'AAA', 'AAA', 'ATA']
+Score: 4
