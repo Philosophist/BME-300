@@ -8,10 +8,12 @@ Description: This module solves the gibbs sampling problem
 Written by: Arjang Fahim
 Bugs:
 Last update date: April, 16, 2019
-Updates: 
-        1- make_countmatrix is added
-		2- make_profile function is completer 
-Version: 1.0.0   
+Updates:
+        1- make_countmatrix problem for zero values is fixed 
+        2- make_countmatrix is added
+		3- make_profile function is completed
+		
+Version: 1.1.0   
 """
 
 
@@ -34,17 +36,13 @@ def make_motif(Dna, k):
 # This is a helper function that returns count and profile matrixes
 def make_countmatrix(matrix):
 
-    # m and n are the dimensions of the given matrix
     m = len(matrix) 
     n = len(matrix[0])
 	
-    hasZero = False  # Sets to true if a zero is found in the count matrix 
+    hasZero = False
     seq = "" 
-    A = 0
-    C = 0
-    G = 0
-    T = 0
-    sum = 0
+    A = C = G = T = 0
+    sum = m
     column_count = []
     count_matrix = []
     profile_calc = []	
@@ -53,7 +51,7 @@ def make_countmatrix(matrix):
     for column in range(n):
         for row in range(m):
             seq = seq + matrix[row][column]
-        print (seq)
+		
         seq = seq.lower()
         A = seq.count("a")
         C = seq.count("c")
@@ -62,30 +60,25 @@ def make_countmatrix(matrix):
 		
         if ((A == 0) or (C == 0) or (G == 0) or (T == 0)):
             hasZero = True
+            sum = 2 * m
 
-        if (hasZero == True):
-            A = A + 1
-            C = C + 1
-            G = G + 1
-            T = T + 1
-			
         column_count.append(A)
         column_count.append(C)
         column_count.append(G)	 
         column_count.append(T)
-        sum =  A+C+G+T
-        column_count.append(sum)
-		
-        profile_calc.append(round((A / sum), 2))
-        profile_calc.append(round((C / sum), 2))
-        profile_calc.append(round((G / sum), 2))
-        profile_calc.append(round((T / sum), 2))
-		
-        profile_matrix.append(profile_calc)
-        count_matrix.append(column_count)
-        column_count = []
-        profile_calc = []		
+	
         seq = ""
+        count_matrix.append(column_count)
+        column_count = [] 
+       
+    for row in range(m):
+        for column in range(n):
+            if (hasZero == True):
+                count_matrix[row][column] = count_matrix[row][column] + 1          
+            profile_calc.append (round((count_matrix[row][column] / sum), 2))
+  				
+        profile_matrix.append(profile_calc)
+        profile_calc = []        
 		
     return (count_matrix, profile_matrix)
 
